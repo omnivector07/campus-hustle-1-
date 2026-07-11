@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log in — Campus Hustle</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="auth-side">
+    <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+    <div>
+      <h1 style="font-size:32px; color:#fff; margin-bottom:14px;">Welcome back to the hustle.</h1>
+      <p style="color:var(--ink-soft); font-size:15px; max-width:340px; line-height:1.6;">Pick up where you left off — check your applications, post a new task, or see who's ready to help.</p>
+    </div>
+    <div class="flyer" style="position:relative; transform:rotate(-3deg); width:220px;">
+      <span class="tag">CODING</span>
+      <h4>Need a FastAPI backend by Friday?</h4>
+      <div class="price">₦15,000</div>
+    </div>
+  </div>
+
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <h1>Log in</h1>
+      <p class="sub">Enter your details to access your Campus Hustle account.</p>
+
+      <div class="alert alert-error" id="form-alert"></div>
+
+      <form id="login-form" novalidate>
+        <div class="field" id="field-email">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@rsu.edu.ng" autocomplete="email" required>
+          <div class="field-error"></div>
+        </div>
+        <div class="field" id="field-password">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+          <div class="field-error"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Log in</button>
+      </form>
+
+      <p class="auth-footer-link">Don't have an account? <a href="/signup.html">Sign up</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

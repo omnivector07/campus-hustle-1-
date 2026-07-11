@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign up — Campus Hustle</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="auth-side">
+    <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+    <div>
+      <h1 style="font-size:32px; color:#fff; margin-bottom:14px;">Join the hustle.</h1>
+      <p style="color:var(--ink-soft); font-size:15px; max-width:340px; line-height:1.6;">Whether you need something done or you're ready to earn — it starts with one free account.</p>
+    </div>
+    <div class="flyer" style="position:relative; transform:rotate(3deg); width:220px;">
+      <span class="tag">GRAPHIC DESIGN</span>
+      <h4>Flyer, logo or poster — 24hr turnaround.</h4>
+      <div class="price">₦3,500</div>
+    </div>
+  </div>
+
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <h1>Create your account</h1>
+      <p class="sub">It only takes a minute to get started.</p>
+
+      <div class="alert alert-error" id="form-alert"></div>
+
+      <form id="signup-form" novalidate>
+        <label style="display:block; font-size:13.5px; font-weight:600; margin-bottom:9px; color:var(--navy-800);">I want to</label>
+        <div class="role-toggle" id="role-toggle">
+          <div class="role-option" data-role="customer">
+            <div class="role-title">Hire</div>
+            <div class="role-desc">Post tasks &amp; get them done</div>
+          </div>
+          <div class="role-option" data-role="worker">
+            <div class="role-title">Earn</div>
+            <div class="role-desc">Browse tasks &amp; apply</div>
+          </div>
+        </div>
+        <input type="hidden" id="role" name="role" value="customer">
+
+        <div class="field" id="field-full_name">
+          <label for="full_name">Full name</label>
+          <input type="text" id="full_name" name="full_name" placeholder="Chidinma Okafor" autocomplete="name" required>
+          <div class="field-error"></div>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@rsu.edu.ng" autocomplete="email" required>
+          <div class="field-error"></div>
+        </div>
+
+        <div class="field" id="field-phone">
+          <label for="phone">Phone number <span style="font-weight:400; color:var(--ink-muted);">(optional)</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="080XXXXXXXX" autocomplete="tel">
+        </div>
+
+        <div class="field" id="field-department">
+          <label for="department">Department <span style="font-weight:400; color:var(--ink-muted);">(optional)</span></label>
+          <input type="text" id="department" name="department" placeholder="Computer Engineering">
+        </div>
+
+        <div class="field" id="field-password">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+          <div class="field-hint">Minimum 8 characters.</div>
+          <div class="field-error"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Create account</button>
+      </form>
+
+      <p class="auth-footer-link">Already have an account? <a href="/login.html">Log in</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

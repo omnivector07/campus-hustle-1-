@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task details — Campus Hustle</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body style="background:var(--paper);">
+
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+    <div class="nav-actions">
+      <a href="#" id="back-link" class="btn btn-ghost-dark btn-sm" style="color:var(--navy-900); border-color:rgba(11,27,51,0.2);">← Back to dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="padding-top:36px; padding-bottom:60px;">
+  <div id="task-detail-root">
+    <div class="loading-block"><div class="loading-spinner"></div></div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/task-detail.js"></script>
+</body>
+</html>

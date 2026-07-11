@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Campus Hustle</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+<div class="mobile-topbar">
+  <button data-sidebar-toggle class="btn btn-ghost-dark btn-sm">☰ Menu</button>
+  <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+  <div style="width:70px;"></div>
+</div>
+
+<div class="dash-shell">
+  <aside class="sidebar">
+    <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" data-view="browse"><span class="icon">🔍</span> Browse tasks</a>
+      <a href="#" class="sidebar-link" data-view="applications"><span class="icon">📨</span> My applications</a>
+      <a href="#" class="sidebar-link" data-view="jobs"><span class="icon">🧰</span> Accepted jobs</a>
+      <a href="/profile.html" class="sidebar-link"><span class="icon">☺</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" data-sidebar-user></div>
+      <a href="#" class="sidebar-link" data-logout style="margin-top:10px;"><span class="icon">⏻</span> Log out</a>
+    </div>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1 id="greeting">Find your next gig</h1>
+        <p class="sub">Browse open tasks that match your skills.</p>
+      </div>
+      <div style="position:relative;">
+        <button class="notif-bell" data-notif-bell>🔔<span class="dot"></span></button>
+        <div class="notif-panel" data-notif-panel></div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Pending applications</div>
+        <div class="stat-value" id="stat-pending">—</div>
+        <div class="stat-icon">📨</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active jobs</div>
+        <div class="stat-value" id="stat-active">—</div>
+        <div class="stat-icon">🧰</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Completed jobs</div>
+        <div class="stat-value" id="stat-completed">—</div>
+        <div class="stat-icon">✓</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Rating</div>
+        <div class="stat-value" id="stat-rating">—</div>
+        <div class="stat-icon">★</div>
+      </div>
+    </div>
+
+    <!-- BROWSE VIEW -->
+    <section id="view-browse">
+      <div class="toolbar">
+        <div class="search-field">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-q" placeholder="Search tasks by title or description…">
+        </div>
+        <select id="filter-category" class="field" style="padding:12px 14px; border:1.5px solid rgba(11,27,51,0.14); border-radius:8px;">
+          <option value="">All categories</option>
+        </select>
+        <select id="filter-sort" class="field" style="padding:12px 14px; border:1.5px solid rgba(11,27,51,0.14); border-radius:8px;">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+        </select>
+      </div>
+      <div id="browse-list" class="task-grid"><div class="loading-block"><div class="loading-spinner"></div></div></div>
+    </section>
+
+    <!-- APPLICATIONS VIEW -->
+    <section id="view-applications" style="display:none;">
+      <div class="panel" id="applications-panel">
+        <div class="loading-block"><div class="loading-spinner"></div></div>
+      </div>
+    </section>
+
+    <!-- ACCEPTED JOBS VIEW -->
+    <section id="view-jobs" style="display:none;">
+      <div class="panel" id="jobs-panel">
+        <div class="loading-block"><div class="loading-spinner"></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/dashboard-worker.js"></script>
+</body>
+</html>

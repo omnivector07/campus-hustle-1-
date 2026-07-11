@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My profile — Campus Hustle</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body style="background:var(--paper);">
+
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+    <div class="nav-actions">
+      <a href="#" id="back-link" class="btn btn-ghost-dark btn-sm" style="color:var(--navy-900); border-color:rgba(11,27,51,0.2);">← Back to dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="max-width:760px; padding-top:36px; padding-bottom:60px;">
+
+  <div class="panel">
+    <div class="profile-header">
+      <div class="profile-avatar-wrap">
+        <div id="avatar-display" class="profile-avatar-fallback">—</div>
+        <label class="avatar-upload-btn" for="avatar-input" title="Change photo">✎</label>
+        <input type="file" id="avatar-input" accept="image/jpeg,image/png,image/webp,image/gif" style="display:none;">
+      </div>
+      <div class="profile-name-block">
+        <h2 id="display-name">—</h2>
+        <div class="role-tag" id="display-role">—</div>
+        <div class="profile-rating" id="display-rating"></div>
+      </div>
+    </div>
+    <div class="skills-wrap" id="skills-display"></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Edit profile</h2></div>
+    <div class="alert alert-error" id="profile-alert"></div>
+    <div class="alert alert-success" id="profile-success"></div>
+    <form id="profile-form" novalidate>
+      <div class="field" id="field-full_name">
+        <label for="full_name">Full name</label>
+        <input type="text" id="full_name" required>
+        <div class="field-error"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="field" id="field-phone">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone">
+        </div>
+        <div class="field" id="field-level">
+          <label for="level">Level</label>
+          <input type="text" id="level" placeholder="e.g. 300">
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="field" id="field-department">
+          <label for="department">Department</label>
+          <input type="text" id="department">
+        </div>
+        <div class="field" id="field-faculty">
+          <label for="faculty">Faculty</label>
+          <input type="text" id="faculty">
+        </div>
+      </div>
+      <div class="field" id="field-bio">
+        <label for="bio">Bio</label>
+        <textarea id="bio" placeholder="Tell customers a bit about yourself…"></textarea>
+      </div>
+
+      <div class="field" id="field-skills-wrap">
+        <label>Skills</label>
+        <div class="field-hint">Select the categories you can help with. Only relevant for workers.</div>
+        <div class="skill-picker" id="skill-picker"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="profile-submit-btn">Save changes</button>
+    </form>
+  </div>
+
+  <div class="panel" id="reviews-panel" style="display:none;">
+    <div class="panel-head"><h2>Reviews received</h2></div>
+    <div id="reviews-list"></div>
+  </div>
+
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/profile.js"></script>
+</body>
+</html>

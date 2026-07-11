@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Campus Hustle</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+<div class="mobile-topbar">
+  <button data-sidebar-toggle class="btn btn-ghost-dark btn-sm">☰ Menu</button>
+  <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+  <div style="width:70px;"></div>
+</div>
+
+<div class="dash-shell">
+  <aside class="sidebar">
+    <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" data-view="overview"><span class="icon">▦</span> Overview</a>
+      <a href="#" class="sidebar-link" data-view="post"><span class="icon">＋</span> Post a task</a>
+      <a href="#" class="sidebar-link" data-view="tasks"><span class="icon">🗂</span> My tasks</a>
+      <a href="/profile.html" class="sidebar-link"><span class="icon">☺</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" data-sidebar-user></div>
+      <a href="#" class="sidebar-link" data-logout style="margin-top:10px;"><span class="icon">⏻</span> Log out</a>
+    </div>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1 id="greeting">Welcome back</h1>
+        <p class="sub">Here's what's happening with your tasks.</p>
+      </div>
+      <div style="position:relative;">
+        <button class="notif-bell" data-notif-bell>🔔<span class="dot"></span></button>
+        <div class="notif-panel" data-notif-panel></div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW VIEW -->
+    <section id="view-overview">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Open tasks</div>
+          <div class="stat-value" id="stat-open">—</div>
+          <div class="stat-icon">🗓</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Assigned</div>
+          <div class="stat-value" id="stat-assigned">—</div>
+          <div class="stat-icon">🤝</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed</div>
+          <div class="stat-value" id="stat-completed">—</div>
+          <div class="stat-icon">✓</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total posted</div>
+          <div class="stat-value" id="stat-total">—</div>
+          <div class="stat-icon">📌</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Recent tasks</h2>
+          <a href="#" class="btn btn-sm btn-outline" data-view-link="tasks">View all</a>
+        </div>
+        <div id="recent-tasks-list"><div class="loading-block"><div class="loading-spinner"></div></div></div>
+      </div>
+    </section>
+
+    <!-- POST TASK VIEW -->
+    <section id="view-post" style="display:none;">
+      <div class="panel" style="max-width:640px;">
+        <div class="panel-head"><h2>Post a new task</h2></div>
+        <div class="alert alert-error" id="post-alert"></div>
+        <form id="post-task-form" novalidate>
+          <div class="field" id="field-title">
+            <label for="title">Task title</label>
+            <input type="text" id="title" name="title" placeholder="e.g. Fix laptop that won't boot" required>
+            <div class="field-error"></div>
+          </div>
+          <div class="field" id="field-description">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Describe exactly what you need done…" required></textarea>
+            <div class="field-error"></div>
+          </div>
+          <div class="field" id="field-category_id">
+            <label for="category_id">Category</label>
+            <select id="category_id" name="category_id" required>
+              <option value="">Select a category</option>
+            </select>
+            <div class="field-error"></div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div class="field" id="field-budget">
+              <label for="budget">Budget (₦)</label>
+              <input type="number" id="budget" name="budget" min="1" placeholder="5000" required>
+              <div class="field-error"></div>
+            </div>
+            <div class="field" id="field-deadline">
+              <label for="deadline">Deadline</label>
+              <input type="date" id="deadline" name="deadline" required>
+              <div class="field-error"></div>
+            </div>
+          </div>
+          <div class="field" id="field-location">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="e.g. Hostel Block C, RSU" required>
+            <div class="field-error"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" id="post-submit-btn">Post task</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- MY TASKS VIEW -->
+    <section id="view-tasks" style="display:none;">
+      <div class="toolbar">
+        <select id="status-filter" class="field" style="padding:12px 14px; border:1.5px solid rgba(11,27,51,0.14); border-radius:8px;">
+          <option value="">All statuses</option>
+          <option value="open">Open</option>
+          <option value="assigned">Assigned</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div id="my-tasks-list"><div class="loading-block"><div class="loading-spinner"></div></div></div>
+    </section>
+
+    <!-- APPLICANTS VIEW (for a single task) -->
+    <section id="view-applicants" style="display:none;">
+      <button class="btn btn-sm btn-outline" id="back-to-tasks" style="margin-bottom:18px;">← Back to my tasks</button>
+      <div class="panel" id="applicants-task-summary"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Applicants</h2></div>
+        <div id="applicants-list"></div>
+      </div>
+    </section>
+
+    <!-- REVIEW MODAL TRIGGER TARGET -->
+  </main>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/dashboard-customer.js"></script>
+</body>
+</html>

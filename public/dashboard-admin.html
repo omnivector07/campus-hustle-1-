@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Campus Hustle</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+<div class="mobile-topbar">
+  <button data-sidebar-toggle class="btn btn-ghost-dark btn-sm">☰ Menu</button>
+  <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+  <div style="width:70px;"></div>
+</div>
+
+<div class="dash-shell">
+  <aside class="sidebar">
+    <a href="/" class="brand"><span class="brand-mark">CH</span>Campus Hustle</a>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" data-view="overview"><span class="icon">▦</span> Dashboard</a>
+      <a href="#" class="sidebar-link" data-view="users"><span class="icon">👥</span> Users</a>
+      <a href="#" class="sidebar-link" data-view="tasks"><span class="icon">🗂</span> Tasks</a>
+      <a href="#" class="sidebar-link" data-view="categories"><span class="icon">🏷</span> Categories</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" data-sidebar-user></div>
+      <a href="#" class="sidebar-link" data-logout style="margin-top:10px;"><span class="icon">⏻</span> Log out</a>
+    </div>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Admin dashboard</h1>
+        <p class="sub">Platform-wide statistics and moderation tools.</p>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section id="view-overview">
+      <div class="stats-row" id="admin-stats">
+        <div class="stat-card"><div class="stat-label">Total users</div><div class="stat-value" id="s-users">—</div><div class="stat-icon">👥</div></div>
+        <div class="stat-card"><div class="stat-label">Customers</div><div class="stat-value" id="s-customers">—</div><div class="stat-icon">🧑‍💼</div></div>
+        <div class="stat-card"><div class="stat-label">Workers</div><div class="stat-value" id="s-workers">—</div><div class="stat-icon">🛠</div></div>
+        <div class="stat-card"><div class="stat-label">Total tasks</div><div class="stat-value" id="s-tasks">—</div><div class="stat-icon">🗂</div></div>
+        <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value" id="s-completed">—</div><div class="stat-icon">✓</div></div>
+        <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="s-pending">—</div><div class="stat-icon">⏳</div></div>
+      </div>
+    </section>
+
+    <!-- USERS -->
+    <section id="view-users" style="display:none;">
+      <div class="panel">
+        <div class="panel-head"><h2>All users</h2></div>
+        <div class="table-wrap" id="users-table"><div class="loading-block"><div class="loading-spinner"></div></div></div>
+      </div>
+    </section>
+
+    <!-- TASKS -->
+    <section id="view-tasks" style="display:none;">
+      <div class="panel">
+        <div class="panel-head"><h2>All tasks</h2></div>
+        <div class="table-wrap" id="tasks-table"><div class="loading-block"><div class="loading-spinner"></div></div></div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section id="view-categories" style="display:none;">
+      <div class="panel" style="max-width:520px;">
+        <div class="panel-head"><h2>Add category</h2></div>
+        <form id="category-form" style="display:flex; gap:10px;">
+          <input type="text" id="category-name" placeholder="Category name" required style="flex:1; padding:12px 14px; border:1.5px solid rgba(11,27,51,0.14); border-radius:8px;">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Manage categories</h2></div>
+        <div class="table-wrap" id="categories-table"><div class="loading-block"><div class="loading-spinner"></div></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/dashboard-admin.js"></script>
+</body>
+</html>
