@@ -113,6 +113,7 @@ const Api = {
   signup: (payload) => apiRequest('/auth/signup', { method: 'POST', body: payload, auth: false }),
   login: (payload) => apiRequest('/auth/login', { method: 'POST', body: payload, auth: false }),
   me: () => apiRequest('/auth/me'),
+  switchRole: (role) => apiRequest('/auth/switch-role', { method: 'PATCH', body: { role } }),
 
   // Categories
   listCategories: () => apiRequest('/categories', { auth: false }),
@@ -384,7 +385,7 @@ async function initNotificationBell() {
   loadNotifications();
 }
 
-/* ---------------- Sidebar user block ---------------- */
+/* ---------------- Sidebar user block with role switcher ---------------- */
 function renderSidebarUser() {
   const el = document.querySelector('[data-sidebar-user]');
   const user = Auth.getUser();
@@ -397,6 +398,35 @@ function renderSidebarUser() {
       <div class="role">${escapeHtml(user.role)}</div>
     </div>
   `;
+  
+  // Add role switcher for non-admin users
+  if (user.role !== 'admin') {
+    const switchBtn = document.createElement('button');
+    switchBtn.className = 'btn btn-sm btn-outline';
+    switchBtn.style.marginTop = '12px';
+    switchBtn.style.width = '100%';
+    const targetRole = user.role === 'worker' ? 'customer' : 'worker';
+    const switchLabel = targetRole === 'customer' ? 'Switch to Hire' : 'Switch to Earn';
+    switchBtn.textContent = switchLabel;
+    switchBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        switchBtn.disabled = true;
+        switchBtn.textContent = 'Switching…';
+        const data = await Api.switchRole(targetRole);
+        Auth.setSession(data.token, data.user);
+        showToast(`Switched to ${targetRole} mode!`, 'success');
+        setTimeout(() => {
+          window.location.href = redirectForRole(data.user.role);
+        }, 500);
+      } catch (err) {
+        handleApiError(err);
+        switchBtn.disabled = false;
+        switchBtn.textContent = switchLabel;
+      }
+    });
+    el.parentElement.appendChild(switchBtn);
+  }
 }
 
 /* ---------------- Logout wiring ---------------- */
