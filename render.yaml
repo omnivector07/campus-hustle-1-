@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: campus-hustle
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_PATH
+        value: /var/data/campus_hustle.db
+      - key: UPLOAD_DIR
+        value: /var/data/uploads/profiles
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
