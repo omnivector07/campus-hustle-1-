@@ -73,4 +73,35 @@ async function logout(request, reply) {
   return sendSuccess(reply, { message: 'Logged out successfully.' });
 }
 
-module.exports = { signup, login, me, logout, toPublicUser };
+// Switch between customer and worker roles (non-destructive, role-switching only)
+async function switchRole(request, reply) {
+  const { role } = request.body;
+  
+  // Validate role
+  if (!['customer', 'worker'].includes(role)) {
+    return sendError(reply, { statusCode: 400, message: 'Invalid role. Must be "customer" or "worker".' });
+  }
+  
+  // Can't switch to the same role
+  if (request.user.role === role) {
+    return sendError(reply, { statusCode: 400, message: `You are already a ${role}.` });
+  }
+  
+  // Can't switch if admin (admins only have one mode)
+  if (request.user.role === 'admin') {
+    return sendError(reply, { statusCode: 403, message: 'Admins cannot switch roles.' });
+  }
+  
+  // Generate new token with updated role
+  const newToken = request.server.jwt.sign({ id: request.user.id, role, email: request.user.email });
+  
+  const profile = Profile.findByUserId(request.user.id);
+  const updatedUser = { ...request.user, role };
+  
+  return sendSuccess(reply, {
+    message: `Switched to ${role} mode.`,
+    data: { token: newToken, user: toPublicUser(updatedUser, profile) },
+  });
+}
+
+module.exports = { signup, login, me, logout, switchRole, toPublicUser };
