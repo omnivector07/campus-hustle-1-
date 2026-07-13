@@ -34,7 +34,7 @@ function seedCategories() {
 function seedAdmin() {
   const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(config.admin.email);
   if (existing) {
-    console.log('[seed] Admin account already exists, skipping.');
+    console.log(`[seed] Admin account already exists: ${config.admin.email}`);
     return existing.id;
   }
 
@@ -48,7 +48,9 @@ function seedAdmin() {
      VALUES (?, ?, ?, ?, ?, ?, ?)`
   ).run(result.lastInsertRowid, config.admin.name, '08000000000', 'Administration', 'Administration', 'N/A', 'Platform administrator account.');
 
-  console.log(`[seed] Admin account created: ${config.admin.email} / ${config.admin.password}`);
+  console.log(`[seed] Admin account created:`);
+  console.log(`       Email: ${config.admin.email}`);
+  console.log(`       Password: ${config.admin.password}`);
   return result.lastInsertRowid;
 }
 
@@ -148,11 +150,12 @@ function seedDemoTask(userIds) {
 }
 
 function main() {
+  console.log('[seed] Starting seed process...');
   seedCategories();
   seedAdmin();
   const userIds = seedDemoUsers();
   seedDemoTask(userIds);
-  console.log('[seed] Done.');
+  console.log('[seed] Done! 🎉');
 }
 
 main();
