@@ -3,7 +3,7 @@ services:
     name: campus-hustle
     env: node
     plan: free
-    buildCommand: npm install
+    buildCommand: apt-get update && apt-get install -y python3 build-essential && npm install
     startCommand: npm start
     envVars:
       - key: NODE_ENV
